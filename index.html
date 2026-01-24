@@ -3,126 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maison Hypolite – Boulangerie Pâtisserie à Faulquemont</title>
+<title>Maison Hypolite | Boulangerie Pâtisserie JM et FILS</title>
 
-<meta name="description" content="Maison Hypolite, boulangerie pâtisserie artisanale à Faulquemont. Pains, pâtisseries, traiteur, commandes et livraison.">
+<meta name="description" content="Maison Hypolite, boulangerie pâtisserie artisanale à Faulquemont. Commandes, livraison, pains, pâtisseries et traiteur.">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-    --primary:#b86b2b;
-    --dark:#4a2a14;
-    --light:#f8f6f3;
+    --bg:#0d0b0a;
+    --primary:#ffb454;
+    --neon:#ff9f1c;
+    --text:#f5f5f5;
 }
 
-*{box-sizing:border-box}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
 
 body{
-    margin:0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background:var(--light);
-    color:#333;
-    line-height:1.6;
+    font-family:Inter,sans-serif;
+    background:radial-gradient(circle at top, #1a120b, #0b0806 70%);
+    color:var(--text);
+    overflow-x:hidden;
 }
 
+/* ===== HERO ===== */
 header{
-    background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
-    url("https://images.unsplash.com/photo-1542838132-92c53300491e");
-    background-size:cover;
-    background-position:center;
-    color:white;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     text-align:center;
-    padding:80px 20px;
+    padding:40px;
 }
 
-header h1{
-    font-size:3rem;
-    margin-bottom:10px;
+.hero h1{
+    font-family:'Playfair Display',serif;
+    font-size:4.5rem;
+    letter-spacing:2px;
+    color:var(--primary);
+    text-shadow:0 0 15px rgba(255,180,84,.6);
+    animation:glow 2.5s infinite alternate;
 }
 
-header p{
-    font-size:1.2rem;
+.hero p{
+    margin-top:20px;
+    font-size:1.3rem;
+    opacity:.9;
 }
 
+.hero button{
+    margin-top:40px;
+    padding:15px 40px;
+    font-size:1rem;
+    border:none;
+    border-radius:40px;
+    background:transparent;
+    color:var(--primary);
+    border:2px solid var(--primary);
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(255,180,84,.4);
+    transition:.3s;
+}
+
+.hero button:hover{
+    background:var(--primary);
+    color:#000;
+    box-shadow:0 0 35px var(--neon);
+}
+
+/* ===== NAV ===== */
 nav{
     position:sticky;
     top:0;
-    background:var(--dark);
-    padding:12px;
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(10px);
     text-align:center;
+    padding:15px;
     z-index:1000;
 }
 
 nav a{
-    color:white;
+    color:var(--text);
+    margin:0 18px;
     text-decoration:none;
-    margin:0 15px;
     font-weight:600;
+    position:relative;
 }
 
-nav a:hover{
-    text-decoration:underline;
+nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:2px;
+    background:var(--neon);
+    transition:.3s;
 }
 
+nav a:hover::after{
+    width:100%;
+}
+
+/* ===== SECTIONS ===== */
 section{
-    max-width:1100px;
+    max-width:1200px;
     margin:auto;
-    padding:60px 20px;
+    padding:120px 30px;
 }
 
 h2{
+    font-family:'Orbitron',sans-serif;
     color:var(--primary);
-    margin-bottom:20px;
-    font-size:2rem;
+    margin-bottom:40px;
+    font-size:2.4rem;
+    text-shadow:0 0 12px rgba(255,180,84,.5);
 }
 
-.cards{
+/* ===== CARDS ===== */
+.grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
 }
 
 .card{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    background:rgba(255,255,255,.05);
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 0 30px rgba(0,0,0,.6);
+    transition:.4s;
+    position:relative;
 }
 
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    box-shadow:0 0 30px var(--neon);
+    opacity:0;
+    transition:.4s;
+}
+
+.card:hover::before{
+    opacity:.6;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.03);
+}
+
+/* ===== HOURS ===== */
 .hours{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    font-size:1.1rem;
+    text-align:center;
+    font-size:1.3rem;
+    background:linear-gradient(135deg,#ffb454,#ff8c00);
+    color:#000;
+    padding:50px;
+    border-radius:25px;
+    box-shadow:0 0 40px rgba(255,180,84,.7);
 }
 
+/* ===== CONTACT ===== */
 .contact{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:30px;
+    gap:40px;
 }
 
 .contact a{
     color:var(--primary);
-    font-weight:bold;
+    font-weight:600;
     text-decoration:none;
 }
 
 iframe{
     width:100%;
-    height:300px;
+    height:320px;
+    border-radius:20px;
     border:none;
-    border-radius:12px;
+    box-shadow:0 0 25px rgba(255,180,84,.4);
 }
 
+/* ===== FOOTER ===== */
 footer{
-    background:#222;
-    color:#ccc;
+    background:#050403;
     text-align:center;
-    padding:25px;
+    padding:50px 20px;
+    font-size:.9rem;
+    opacity:.8;
 }
 
-@media(max-width:768px){
-    header h1{font-size:2.2rem}
+/* ===== ANIM ===== */
+@keyframes glow{
+    from{ text-shadow:0 0 10px rgba(255,180,84,.5); }
+    to{ text-shadow:0 0 30px rgba(255,180,84,.9); }
+}
+
+@media(max-width:850px){
+    .hero h1{font-size:3rem}
     .contact{grid-template-columns:1fr}
 }
 </style>
@@ -131,32 +217,34 @@ footer{
 <body>
 
 <header>
-    <h1>Maison Hypolite</h1>
-    <p>Boulangerie • Pâtisserie • Traiteur</p>
+    <div class="hero">
+        <h1>Maison Hypolite</h1>
+        <p>Boulangerie · Pâtisserie · Traiteur artisanal</p>
+        <button onclick="document.getElementById('contact').scrollIntoView()">Nous contacter</button>
+    </div>
 </header>
 
 <nav>
-    <a href="#presentation">Présentation</a>
+    <a href="#presentation">La Maison</a>
     <a href="#services">Services</a>
     <a href="#horaires">Horaires</a>
     <a href="#contact">Contact</a>
 </nav>
 
 <section id="presentation">
-    <h2>Un savoir-faire artisanal</h2>
+    <h2>Une maison de caractère</h2>
     <p>
-        La <strong>Maison Hypolite</strong> vous accueille à Faulquemont et Longeville-lès-Saint-Avold.
-        Nous fabriquons chaque jour pains, viennoiseries et pâtisseries avec des produits de qualité,
-        dans le respect des traditions artisanales.
+        Implantée à <strong>Faulquemont</strong> et <strong>Longeville-lès-Saint-Avold</strong>,
+        la <strong>Maison Hypolite</strong> incarne l’artisanat, la passion et l’exigence du goût.
     </p>
 </section>
 
 <section id="services">
     <h2>Nos spécialités</h2>
-    <div class="cards">
-        <div class="card">🥖 Pains artisanaux & spéciaux</div>
+    <div class="grid">
+        <div class="card">🥖 Pains artisanaux</div>
         <div class="card">🥐 Viennoiseries maison</div>
-        <div class="card">🎂 Pâtisseries & gâteaux sur commande</div>
+        <div class="card">🎂 Pâtisseries & gâteaux</div>
         <div class="card">🥪 Traiteur & snacking</div>
         <div class="card">📦 Commandes personnalisées</div>
         <div class="card">🚚 Livraison disponible</div>
@@ -164,38 +252,32 @@ footer{
 </section>
 
 <section id="horaires">
-    <h2>Horaires d’ouverture</h2>
+    <h2>Horaires</h2>
     <div class="hours">
-        <strong>Mardi – Samedi :</strong> 6h00 – 18h30<br><br>
-        <strong>Dimanche :</strong> 7h00 – 12h30<br><br>
-        <strong>Lundi :</strong> Fermé
+        Mardi – Samedi : 6h00 – 18h30<br><br>
+        Dimanche : 7h00 – 12h30<br><br>
+        Lundi : Fermé
     </div>
 </section>
 
 <section id="contact">
-    <h2>Nous contacter</h2>
+    <h2>Contact</h2>
     <div class="contact">
         <div>
-            📍 <strong>Adresse</strong><br>
-            20 Rue de Metz<br>
-            57380 Faulquemont<br><br>
-
-            📞 <strong>Téléphone</strong><br>
-            <a href="tel:0387907969">03 87 90 79 69</a><br><br>
-
+            📍 20 Rue de Metz, 57380 Faulquemont<br><br>
+            📞 <a href="tel:0387907969">03 87 90 79 69</a><br><br>
             📦 Commandes & livraisons sur demande
         </div>
 
-        <iframe 
-        src="https://www.google.com/maps?q=20%20Rue%20de%20Metz%2057380%20Faulquemont&output=embed">
-        </iframe>
+        <iframe src="https://www.google.com/maps?q=20%20Rue%20de%20Metz%2057380%20Faulquemont&output=embed"></iframe>
     </div>
 </section>
 
 <footer>
-    © 2026 Maison Hypolite – Boulangerie Pâtisserie artisanale
+    © 2026 Maison Hypolite — Tous droits réservés
 </footer>
 
 </body>
 </html>
+
 
