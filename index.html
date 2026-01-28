@@ -10,23 +10,22 @@
 
 <style>
 :root{
-  --bg:#fef8f0; /* beige doux */
-  --panel:#fff6e5; /* crème panels */
-  --gold:#ff8c42; /* orange chaud */
-  --neon:#ffd65c; /* jaune lumineux */
-  --text:#4b3f2f; /* brun chocolat */
-  --muted:#7a6a58; /* brun clair */
+  --bg:#0d0d0d; /* fond sombre */
+  --panel:#1a1a1a; /* panels sombres */
+  --text:#fdf0e3; /* texte blanc chaud */
+  --muted:#7a5c5c; /* texte secondaire */
+  --accent:#d42f3b; /* rouge lumineux */
+  --highlight:#8b1f6c; /* violet glow */
   --radius-xl:48px;
   --radius-lg:32px;
-  --radius-md:20px;
 }
 
 /* RESET */
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;}
 
-/* CANVAS CINEMA */
+/* CANVAS PARTICULES */
 canvas#bg{position:fixed;inset:0;z-index:-2;}
 
 /* HERO */
@@ -34,15 +33,15 @@ header{min-height:100vh;display:flex;align-items:center;justify-content:center;t
 .hero{max-width:1000px;}
 .hero h1{
   font-family:'Playfair Display',serif;font-size:5.5rem;letter-spacing:4px;
-  color:var(--gold);
-  text-shadow:0 0 30px var(--gold),0 0 60px var(--neon),0 0 90px var(--neon);
+  color:var(--accent);
+  text-shadow:0 0 30px var(--accent),0 0 60px var(--highlight),0 0 90px var(--highlight);
   animation:pulse 4s infinite alternate, flicker 0.15s infinite;
   position:relative;cursor:pointer;
 }
 @keyframes pulse{
-  0%{ text-shadow:0 0 20px var(--gold),0 0 40px var(--neon);}
-  50%{ text-shadow:0 0 60px var(--gold),0 0 120px var(--neon);}
-  100%{ text-shadow:0 0 30px var(--gold),0 0 70px var(--neon);}
+  0%{ text-shadow:0 0 20px var(--accent),0 0 40px var(--highlight);}
+  50%{ text-shadow:0 0 60px var(--accent),0 0 120px var(--highlight);}
+  100%{ text-shadow:0 0 30px var(--accent),0 0 70px var(--highlight);}
 }
 @keyframes flicker{
   0%,19%,21%,23%,25%,54%,56%,100%{opacity:1}
@@ -50,33 +49,33 @@ header{min-height:100vh;display:flex;align-items:center;justify-content:center;t
 }
 .hero p{margin-top:30px;font-size:1.35rem;color:var(--muted);text-shadow:0 0 20px rgba(255,180,84,.3);}
 
-/* CTA NEON */
+/* CTA */
 .cta{
-  display:inline-block;margin-top:70px;padding:22px 70px;border-radius:80px;border:2px solid var(--gold);
-  color:var(--gold);text-decoration:none;font-weight:600;letter-spacing:2px;position:relative;overflow:hidden;transition:.3s;
+  display:inline-block;margin-top:70px;padding:22px 70px;border-radius:80px;border:2px solid var(--accent);
+  color:var(--accent);text-decoration:none;font-weight:600;letter-spacing:2px;position:relative;overflow:hidden;transition:.3s;
 }
 .cta::before{
-  content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(255,140,66,.8),transparent);
+  content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(212,47,59,.8),transparent);
   transform:translateX(-100%);
 }
 .cta:hover::before{animation:shine 1s linear}
 @keyframes shine{to{transform:translateX(100%)}}
 .cta:hover{
-  background:var(--gold);color:#fff;box-shadow:0 0 180px var(--neon),0 0 240px var(--gold);
+  background:var(--accent);color:#fff;box-shadow:0 0 180px var(--highlight),0 0 240px var(--accent);
   transform:translateY(-10px) scale(1.08) rotateZ(-1deg);
 }
 
 /* NAV */
 nav{
   position:sticky;top:0;z-index:1000;backdrop-filter:blur(18px);
-  background:rgba(254,248,240,.85);padding:20px;text-align:center;
-  border-bottom:1px solid rgba(255,140,66,.3);
+  background:rgba(13,13,13,.85);padding:20px;text-align:center;
+  border-bottom:1px solid rgba(212,47,59,.3);
 }
 nav a{
   color:var(--text);margin:0 26px;text-decoration:none;font-weight:500;position:relative;
 }
 nav a::after{
-  content:"";position:absolute;left:50%;bottom:-6px;width:0;height:2px;background:var(--gold);transition:.3s;transform:translateX(-50%);
+  content:"";position:absolute;left:50%;bottom:-6px;width:0;height:2px;background:var(--accent);transition:.3s;transform:translateX(-50%);
 }
 nav a:hover::after{width:100%;}
 
@@ -88,51 +87,51 @@ section{
 }
 section.visible{
   opacity:1;transform:translateY(0) scale(1);
-  box-shadow:0 0 140px rgba(255,140,66,.4);
+  box-shadow:0 0 140px rgba(212,47,59,.4);
 }
 h2{
-  font-family:'Playfair Display',serif;font-size:3rem;color:var(--gold);
-  margin-bottom:60px;text-shadow:0 0 30px rgba(255,214,92,.4);
+  font-family:'Playfair Display',serif;font-size:3rem;color:var(--accent);
+  margin-bottom:60px;text-shadow:0 0 30px var(--highlight);
   position:relative;animation:glowText 3s infinite alternate;cursor:pointer;
 }
 @keyframes glowText{
-  from{text-shadow:0 0 10px var(--gold),0 0 20px var(--neon);}
-  to{text-shadow:0 0 40px var(--gold),0 0 80px var(--neon);}
+  from{text-shadow:0 0 10px var(--accent),0 0 20px var(--highlight);}
+  to{text-shadow:0 0 40px var(--accent),0 0 80px var(--highlight);}
 }
 
 /* PANELS */
 .panel{
   background:var(--panel);border-radius:var(--radius-xl);padding:80px;
-  box-shadow:0 0 0 1px rgba(255,140,66,.2),0 50px 150px rgba(0,0,0,.1),0 0 80px var(--neon);
+  box-shadow:0 0 0 1px rgba(212,47,59,.2),0 50px 150px rgba(0,0,0,.1),0 0 80px var(--highlight);
   transition:.5s;transform-style: preserve-3d;perspective: 1000px;
 }
-.panel:hover{box-shadow:0 0 200px var(--neon),0 0 140px var(--gold),0 60px 150px rgba(0,0,0,.15);transform:scale(1.03) rotateX(3deg) rotateY(3deg);}
+.panel:hover{box-shadow:0 0 200px var(--highlight),0 0 140px var(--accent),0 60px 150px rgba(0,0,0,.15);transform:scale(1.03) rotateX(3deg) rotateY(3deg);}
 
 /* GRID / CARDS 3D */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:45px;}
 .card{
-  background:rgba(255,246,229,.8);padding:60px 40px;border-radius:var(--radius-lg);
+  background:rgba(26,26,26,.8);padding:60px 40px;border-radius:var(--radius-lg);
   text-align:center;position:relative;transition:.5s;transform-style: preserve-3d;cursor:pointer;
 }
 .card::before{
-  content:"";position:absolute;inset:0;border-radius:var(--radius-lg);box-shadow:0 0 90px var(--neon);opacity:0;transition:.5s;
+  content:"";position:absolute;inset:0;border-radius:var(--radius-lg);box-shadow:0 0 90px var(--highlight);opacity:0;transition:.5s;
 }
 .card:hover::before{opacity:.5;filter:blur(10px);}
 .card:hover{transform:translateY(-20px) scale(1.08) rotateX(8deg) rotateY(8deg);}
 
 /* HOURS */
 .hours{
-  background:linear-gradient(135deg,#ff8c42,#ffd65c);color:#fff;border-radius:var(--radius-xl);
-  padding:90px;font-size:1.5rem;text-align:center;box-shadow:0 0 200px rgba(255,140,66,.9);
+  background:linear-gradient(135deg,#d42f3b,#8b1f6c,#f25fa0);color:#fff;border-radius:var(--radius-xl);
+  padding:90px;font-size:1.5rem;text-align:center;box-shadow:0 0 200px rgba(212,47,59,.9);
 }
 
 /* CONTACT */
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:70px;}
-.contact a{color:var(--gold);font-weight:600;text-decoration:none;}
-iframe{width:100%;height:380px;border:none;border-radius:var(--radius-xl);box-shadow:0 0 90px rgba(255,140,66,.6);}
+.contact a{color:var(--accent);font-weight:600;text-decoration:none;}
+iframe{width:100%;height:380px;border:none;border-radius:var(--radius-xl);box-shadow:0 0 90px rgba(212,47,59,.6);}
 
 /* FOOTER */
-footer{text-align:center;padding:120px 20px;color:var(--muted);border-top:1px solid rgba(255,140,66,.15);}
+footer{text-align:center;padding:120px 20px;color:var(--muted);border-top:1px solid rgba(212,47,59,.15);}
 
 /* RESPONSIVE */
 @media(max-width:900px){.hero h1{font-size:3.4rem}.contact{grid-template-columns:1fr}section{padding:120px 25px}}
@@ -195,11 +194,11 @@ footer{text-align:center;padding:120px 20px;color:var(--muted);border-top:1px so
   <div class="contact">
     <div class="panel">
       📍 20 Rue de Metz<br>
-      57380 Faulquemont<br><br>
+      57380 Longeville-lès-Saint-Avold<br><br>
       📞 <a href="tel:0387907969">03 87 90 79 69</a><br><br>
       📦 Commandes & livraisons sur demande
     </div>
-    <iframe src="https://www.google.com/maps?q=20%20Rue%20de%20Metz%2057380%20Faulquemont&output=embed"></iframe>
+    <iframe src="https://www.google.com/maps?q=20%20Rue%20de%20Metz%2057380%20Longeville-lès-Saint-Avold&output=embed"></iframe>
   </div>
 </section>
 
@@ -208,65 +207,34 @@ footer{text-align:center;padding:120px 20px;color:var(--muted);border-top:1px so
 </footer>
 
 <script>
-// BACKGROUND PARTICLES CINEMA 3D + INTERACTIVES
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
+// PARTICULES CINÉMATIQUES
+const canvas=document.getElementById("bg"),ctx=canvas.getContext("2d");
 function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
-resize();
-addEventListener("resize", resize);
+resize();addEventListener("resize",resize);
 
-let layers = [
+let layers=[
   [...Array(80)].map(()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,v:Math.random()*0.7+0.3,glow:Math.random()*0.5+0.5})),
   [...Array(50)].map(()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*4+2,v:Math.random()*0.4+0.2,glow:Math.random()*0.6+0.7}))
 ];
 
-addEventListener("mousemove", e=>{
-  layers.forEach(layer=>{
-    layer.forEach(p=>{
-      p.x += (e.clientX - canvas.width/2)/2000;
-      p.y += (e.clientY - canvas.height/2)/2000;
-    });
-  });
-});
+addEventListener("mousemove",e=>{layers.forEach(layer=>{layer.forEach(p=>{p.x+=(e.clientX-canvas.width/2)/2000;p.y+=(e.clientY-canvas.height/2)/2000;});});});
+addEventListener("click",e=>{layers.forEach(layer=>{layer.forEach(p=>{p.x+=(Math.random()-0.5)*50;p.y+=(Math.random()-0.5)*50;});});});
 
-addEventListener("click", e=>{
-  layers.forEach(layer=>{
-    layer.forEach(p=>{
-      p.x += (Math.random()-0.5)*50;
-      p.y += (Math.random()-0.5)*50;
-    });
-  });
-});
-
-function anim(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  layers.forEach(layer=>{
-    layer.forEach(p=>{
-      p.y += p.v;
-      if(p.y>canvas.height)p.y=0;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,140,66,${p.glow})`;
-      ctx.shadowColor="rgba(255,214,92,0.8)";
-      ctx.shadowBlur=20;
-      ctx.fill();
-    });
-  });
-  requestAnimationFrame(anim);
-}
+function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);
+  layers.forEach(layer=>{layer.forEach(p=>{
+    p.y+=p.v;if(p.y>canvas.height)p.y=0;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(212,47,59,${p.glow})`;
+    ctx.shadowColor="rgba(255,95,160,0.8)";
+    ctx.shadowBlur=20;ctx.fill();
+  });});requestAnimationFrame(anim);}
 anim();
 
-// SCROLL REVEAL + glow panels
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-      entry.target.style.boxShadow="0 0 200px rgba(255,140,66,.6)";
-    }
-  });
-},{threshold:0.2});
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");entry.target.style.boxShadow="0 0 200px rgba(212,47,59,.6)";}}},{threshold:0.2});
 document.querySelectorAll("section").forEach(s=>obs.observe(s));
 </script>
 </body>
 </html>
+
 
