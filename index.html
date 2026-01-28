@@ -9,12 +9,13 @@
 
 <style>
 :root{
-  --text:#fdf0e3;
-  --muted:#d6bcbc;
+  --bg1:#12070a;
+  --bg2:#2a0d14;
+  --bg3:#0d0d0d;
   --accent:#d42f3b;
   --accent2:#8b1f6c;
-  --panel:#151515;
-  --radius:40px;
+  --text:#fdf0e3;
+  --panel:#161616;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -24,16 +25,18 @@ body{
   color:var(--text);
   overflow-x:hidden;
   background:
-    radial-gradient(circle at 10% 20%, rgba(212,47,59,.35), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(139,31,108,.35), transparent 45%),
-    radial-gradient(circle at 50% 90%, rgba(255,120,80,.25), transparent 50%),
-    linear-gradient(180deg,#0b0b0b,#120b10,#0b0b0b);
-  animation:bgMove 20s ease-in-out infinite alternate;
+    radial-gradient(circle at 20% 30%, rgba(212,47,59,.45), transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(139,31,108,.45), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(255,120,80,.35), transparent 50%),
+    linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3));
+  background-size:200% 200%;
+  animation:bgAnim 18s ease-in-out infinite;
 }
 
-@keyframes bgMove{
-  from{background-position:0% 0%}
-  to{background-position:100% 100%}
+@keyframes bgAnim{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 /* HERO */
@@ -50,12 +53,17 @@ header{
   font-size:4.8rem;
   letter-spacing:4px;
   color:var(--accent);
-  text-shadow:0 0 40px var(--accent),0 0 80px var(--accent2);
+  text-shadow:0 0 50px var(--accent),0 0 90px var(--accent2);
+  animation:titlePulse 4s infinite alternate;
+}
+@keyframes titlePulse{
+  from{text-shadow:0 0 40px var(--accent)}
+  to{text-shadow:0 0 120px var(--accent2)}
 }
 .hero p{
   margin-top:30px;
   font-size:1.3rem;
-  color:var(--muted);
+  color:#e6cfcf;
 }
 .cta{
   display:inline-block;
@@ -66,13 +74,17 @@ header{
   color:var(--accent);
   text-decoration:none;
   font-weight:600;
-  transition:.4s;
+  letter-spacing:2px;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
 }
 .cta:hover{
   background:var(--accent);
   color:#fff;
-  box-shadow:0 0 120px var(--accent2);
-  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 0 150px var(--accent2);
 }
 
 /* NAV */
@@ -89,7 +101,20 @@ nav a{
   color:var(--text);
   margin:0 22px;
   text-decoration:none;
+  position:relative;
 }
+nav a::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-6px;
+  width:0;
+  height:2px;
+  background:var(--accent);
+  transition:.3s;
+  transform:translateX(-50%);
+}
+nav a:hover::after{width:100%}
 
 /* SECTIONS */
 section{
@@ -98,7 +123,7 @@ section{
   padding:150px 40px;
   opacity:0;
   transform:translateY(60px);
-  transition:1s;
+  transition:1s ease;
 }
 section.visible{
   opacity:1;
@@ -109,13 +134,13 @@ h2{
   font-size:3rem;
   color:var(--accent);
   margin-bottom:60px;
-  text-shadow:0 0 40px var(--accent2);
+  text-shadow:0 0 50px var(--accent2);
 }
 
 /* PANELS */
 .panel{
   background:var(--panel);
-  border-radius:var(--radius);
+  border-radius:40px;
   padding:80px;
   box-shadow:0 0 120px rgba(212,47,59,.4);
 }
@@ -127,21 +152,21 @@ h2{
   gap:45px;
 }
 .card{
-  background:#1b1b1b;
+  background:#1d1d1d;
   padding:60px 40px;
   border-radius:30px;
   text-align:center;
   transition:.4s;
 }
 .card:hover{
-  transform:translateY(-15px) scale(1.05);
-  box-shadow:0 0 100px rgba(212,47,59,.6);
+  transform:translateY(-18px) scale(1.05);
+  box-shadow:0 0 120px rgba(212,47,59,.6);
 }
 
 /* HORAIRES */
 .hours{
   background:linear-gradient(135deg,#d42f3b,#8b1f6c,#ff7b54);
-  border-radius:var(--radius);
+  border-radius:40px;
   padding:90px;
   font-size:1.5rem;
   text-align:center;
@@ -173,7 +198,7 @@ iframe{
 footer{
   text-align:center;
   padding:120px 20px;
-  color:var(--muted);
+  color:#cfa9a9;
 }
 
 /* RESPONSIVE */
@@ -234,7 +259,6 @@ footer{
 <section id="contact">
   <h2>Nous contacter</h2>
   <div class="contact">
-
     <div class="panel">
       <img src="boulangerie.jpg" class="shop-photo" alt="Boulangerie">
 
@@ -244,11 +268,9 @@ footer{
       📞 <a href="tel:0387907969">03 87 90 79 69</a>
     </div>
 
-    <!-- GOOGLE MAPS EXACT -->
     <iframe 
       src="https://www.google.com/maps?q=20%20Rue%20de%20Metz%2057380%20Longeville-l%C3%A8s-Saint-Avold&output=embed">
     </iframe>
-
   </div>
 </section>
 
