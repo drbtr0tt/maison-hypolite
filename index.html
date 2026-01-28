@@ -13,8 +13,8 @@
   --panel:#1a1a1a;
   --text:#fdf0e3;
   --muted:#7a5c5c;
-  --accent:#d42f3b; /* rouge chaud */
-  --highlight:#8b1f6c; /* violet glow */
+  --accent:#d42f3b;
+  --highlight:#8b1f6c;
   --radius-xl:48px;
   --radius-lg:32px;
 }
@@ -22,10 +22,21 @@
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;position:relative;}
+body{
+    font-family:Inter,sans-serif;
+    overflow-x:hidden;
+    line-height:1.7;
+    position:relative;
 
-/* CANVAS */
-canvas#bg{position:fixed;inset:0;z-index:-2;}
+    /* IMAGE DE FOND + OVERLAY */
+    background:
+        linear-gradient(rgba(13,13,13,0.6), rgba(13,13,13,0.6)),
+        url('6654e812-5a63-4164-847b-9fded3e9fcaf.png') center/cover no-repeat;
+    color: var(--text);
+}
+
+/* CANVAS PARTICULES */
+canvas#bg{position:fixed;inset:0;z-index:-1;}
 
 /* HERO */
 header{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 30px;overflow:hidden;}
