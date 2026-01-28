@@ -9,14 +9,12 @@
 
 <style>
 :root{
-  --bg:#0b0b0b;
-  --panel:#161616;
   --text:#fdf0e3;
-  --muted:#b89a9a;
+  --muted:#d6bcbc;
   --accent:#d42f3b;
-  --highlight:#8b1f6c;
-  --radius-xl:48px;
-  --radius-lg:32px;
+  --accent2:#8b1f6c;
+  --panel:#151515;
+  --radius:40px;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -26,17 +24,16 @@ body{
   color:var(--text);
   overflow-x:hidden;
   background:
-    radial-gradient(circle at 20% 20%, rgba(212,47,59,0.25), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(139,31,108,0.25), transparent 40%),
-    linear-gradient(rgba(10,10,10,.88),rgba(10,10,10,.88)),
-    url("boulangerie.jpg") center/cover fixed no-repeat;
+    radial-gradient(circle at 10% 20%, rgba(212,47,59,.35), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(139,31,108,.35), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(255,120,80,.25), transparent 50%),
+    linear-gradient(180deg,#0b0b0b,#120b10,#0b0b0b);
+  animation:bgMove 20s ease-in-out infinite alternate;
 }
 
-/* CANVAS */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:-1;
+@keyframes bgMove{
+  from{background-position:0% 0%}
+  to{background-position:100% 100%}
 }
 
 /* HERO */
@@ -47,38 +44,19 @@ header{
   justify-content:center;
   text-align:center;
   padding:80px 30px;
-  position:relative;
 }
-header::after{
-  content:"";
-  position:absolute;
-  inset:-50%;
-  background:radial-gradient(circle,rgba(212,47,59,0.18),transparent 60%);
-  animation:drift 25s linear infinite;
-}
-@keyframes drift{
-  from{transform:translate(0,0)}
-  to{transform:translate(30%,30%)}
-}
-
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-size:5rem;
+  font-size:4.8rem;
   letter-spacing:4px;
   color:var(--accent);
-  text-shadow:0 0 40px var(--accent),0 0 80px var(--highlight);
-  animation:pulse 4s infinite alternate;
-}
-@keyframes pulse{
-  from{text-shadow:0 0 30px var(--accent)}
-  to{text-shadow:0 0 90px var(--highlight)}
+  text-shadow:0 0 40px var(--accent),0 0 80px var(--accent2);
 }
 .hero p{
   margin-top:30px;
   font-size:1.3rem;
   color:var(--muted);
 }
-
 .cta{
   display:inline-block;
   margin-top:60px;
@@ -88,71 +66,56 @@ header::after{
   color:var(--accent);
   text-decoration:none;
   font-weight:600;
-  letter-spacing:2px;
   transition:.4s;
 }
 .cta:hover{
   background:var(--accent);
   color:#fff;
-  box-shadow:0 0 120px var(--highlight);
-  transform:translateY(-10px) scale(1.08);
+  box-shadow:0 0 120px var(--accent2);
+  transform:translateY(-10px) scale(1.05);
 }
 
 /* NAV */
 nav{
   position:sticky;
   top:0;
-  z-index:1000;
-  backdrop-filter:blur(18px);
-  background:rgba(10,10,10,.8);
+  background:rgba(10,10,10,.85);
+  backdrop-filter:blur(12px);
   padding:20px;
   text-align:center;
+  z-index:1000;
 }
 nav a{
   color:var(--text);
-  margin:0 24px;
+  margin:0 22px;
   text-decoration:none;
-  position:relative;
 }
-nav a::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-6px;
-  width:0;
-  height:2px;
-  background:var(--accent);
-  transition:.3s;
-  transform:translateX(-50%);
-}
-nav a:hover::after{width:100%}
 
 /* SECTIONS */
 section{
   max-width:1300px;
   margin:auto;
-  padding:160px 40px;
+  padding:150px 40px;
   opacity:0;
-  transform:translateY(80px) scale(.95);
-  transition:1.2s ease;
+  transform:translateY(60px);
+  transition:1s;
 }
 section.visible{
   opacity:1;
-  transform:translateY(0) scale(1);
+  transform:none;
 }
-
 h2{
   font-family:'Playfair Display',serif;
   font-size:3rem;
   color:var(--accent);
   margin-bottom:60px;
-  text-shadow:0 0 30px var(--highlight);
+  text-shadow:0 0 40px var(--accent2);
 }
 
 /* PANELS */
 .panel{
   background:var(--panel);
-  border-radius:var(--radius-xl);
+  border-radius:var(--radius);
   padding:80px;
   box-shadow:0 0 120px rgba(212,47,59,.4);
 }
@@ -164,21 +127,21 @@ h2{
   gap:45px;
 }
 .card{
-  background:rgba(22,22,22,.85);
+  background:#1b1b1b;
   padding:60px 40px;
-  border-radius:var(--radius-lg);
+  border-radius:30px;
   text-align:center;
-  transition:.5s;
+  transition:.4s;
 }
 .card:hover{
-  transform:translateY(-20px) scale(1.08);
-  box-shadow:0 0 120px var(--highlight);
+  transform:translateY(-15px) scale(1.05);
+  box-shadow:0 0 100px rgba(212,47,59,.6);
 }
 
 /* HORAIRES */
 .hours{
-  background:linear-gradient(135deg,#d42f3b,#8b1f6c);
-  border-radius:var(--radius-xl);
+  background:linear-gradient(135deg,#d42f3b,#8b1f6c,#ff7b54);
+  border-radius:var(--radius);
   padding:90px;
   font-size:1.5rem;
   text-align:center;
@@ -192,16 +155,18 @@ h2{
 }
 .shop-photo{
   width:100%;
-  height:320px;
-  border-radius:var(--radius-xl);
+  height:300px;
   object-fit:cover;
+  border-radius:30px;
   margin-bottom:40px;
-  box-shadow:0 0 100px rgba(212,47,59,.6);
+  box-shadow:0 0 80px rgba(212,47,59,.6);
 }
-.contact a{
-  color:var(--accent);
-  font-weight:600;
-  text-decoration:none;
+iframe{
+  width:100%;
+  height:380px;
+  border:none;
+  border-radius:30px;
+  box-shadow:0 0 80px rgba(212,47,59,.6);
 }
 
 /* FOOTER */
@@ -213,7 +178,7 @@ footer{
 
 /* RESPONSIVE */
 @media(max-width:900px){
-  .hero h1{font-size:3.3rem}
+  .hero h1{font-size:3.2rem}
   .contact{grid-template-columns:1fr}
 }
 </style>
@@ -221,13 +186,11 @@ footer{
 
 <body>
 
-<canvas id="bg"></canvas>
-
 <header>
   <div class="hero">
     <h1>Maison Hypolite</h1>
     <p>Boulangerie · Pâtisserie · JM et FILS</p>
-    <a href="#contact" class="cta">Commander & Nous contacter</a>
+    <a href="#contact" class="cta">Nous contacter</a>
   </div>
 </header>
 
@@ -241,8 +204,8 @@ footer{
 <section id="maison">
   <h2>La Boulangerie</h2>
   <div class="panel">
-    Artisanat exigeant, passion et tradition.
-    Chaque jour, des créations fraîches et authentiques à Faulquemont
+    Artisanat, tradition et exigence.
+    Une production quotidienne fraîche à Faulquemont
     et Longeville-lès-Saint-Avold.
   </div>
 </section>
@@ -251,9 +214,9 @@ footer{
   <h2>Services & engagements</h2>
   <div class="grid">
     <div class="card">🥐 Fabrication artisanale</div>
-    <div class="card">🎂 Événements & gâteaux</div>
+    <div class="card">🎂 Gâteaux & événements</div>
     <div class="card">📦 Commandes personnalisées</div>
-    <div class="card">🚚 Livraison quotidienne</div>
+    <div class="card">🚚 Livraison</div>
     <div class="card">🏪 Pros & particuliers</div>
     <div class="card">❤️ Qualité constante</div>
   </div>
@@ -271,73 +234,34 @@ footer{
 <section id="contact">
   <h2>Nous contacter</h2>
   <div class="contact">
-    <div class="panel">
 
-      <!-- PHOTO AVANT LES NUMÉROS -->
-      <img src="boulangerie.jpg" class="shop-photo" alt="Maison Hypolite">
+    <div class="panel">
+      <img src="boulangerie.jpg" class="shop-photo" alt="Boulangerie">
 
       📍 Faulquemont<br>
       📞 <a href="tel:0387901234">03 87 90 12 34</a><br><br>
       📍 Longeville-lès-Saint-Avold<br>
       📞 <a href="tel:0387907969">03 87 90 79 69</a>
     </div>
+
+    <!-- GOOGLE MAPS EXACT -->
+    <iframe 
+      src="https://www.google.com/maps?q=20%20Rue%20de%20Metz%2057380%20Longeville-l%C3%A8s-Saint-Avold&output=embed">
+    </iframe>
+
   </div>
 </section>
 
 <footer>
-  © 2026 Maison Hypolite — Boulangerie Pâtisserie
+  © 2026 Maison Hypolite — Boulangerie Pâtisserie JM et FILS
 </footer>
 
 <script>
-const canvas=document.getElementById("bg");
-const ctx=canvas.getContext("2d");
-let w,h;
-function resize(){
-  w=canvas.width=innerWidth;
-  h=canvas.height=innerHeight;
-}
-resize();
-addEventListener("resize",resize);
-
-const particles=[...Array(180)].map(()=>({
-  x:Math.random()*w,
-  y:Math.random()*h,
-  a:Math.random()*Math.PI*2,
-  s:Math.random()*0.3+0.1,
-  r:Math.random()*2+0.5,
-  o:Math.random()*0.6+0.2
-}));
-
-let t=0;
-function anim(){
-  ctx.clearRect(0,0,w,h);
-  t+=0.002;
-  particles.forEach(p=>{
-    p.x+=Math.cos(p.a+t)*p.s;
-    p.y+=Math.sin(p.a+t)*p.s;
-    if(p.x<0)p.x=w;if(p.x>w)p.x=0;
-    if(p.y<0)p.y=h;if(p.y>h)p.y=0;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(212,47,59,${p.o})`;
-    ctx.shadowBlur=20;
-    ctx.shadowColor="rgba(212,47,59,.8)";
-    ctx.fill();
-  });
-  requestAnimationFrame(anim);
-}
-anim();
-
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting)e.target.classList.add("visible");
-  });
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>x.isIntersecting&&x.target.classList.add("visible"));
 },{threshold:.2});
 document.querySelectorAll("section").forEach(s=>obs.observe(s));
 </script>
 
 </body>
 </html>
-
-
-
