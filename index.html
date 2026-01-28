@@ -13,8 +13,8 @@
   --panel:#1a1a1a;
   --text:#fdf0e3;
   --muted:#7a5c5c;
-  --accent:#d42f3b;
-  --highlight:#8b1f6c;
+  --accent:#d42f3b; /* rouge chaud */
+  --highlight:#8b1f6c; /* violet glow */
   --radius-xl:48px;
   --radius-lg:32px;
 }
@@ -120,7 +120,7 @@ h2{
 
 /* HOURS */
 .hours{
-  background:linear-gradient(135deg,#d42f3b,#8b1f6c,#f25fa0);color:#fff;border-radius:var(--radius-xl);
+  background:linear-gradient(135deg,#d42f3b,#8b1f6c,#d42f3b);color:#fff;border-radius:var(--radius-xl);
   padding:90px;font-size:1.5rem;text-align:center;box-shadow:0 0 200px rgba(212,47,59,.9);
 }
 
@@ -191,8 +191,9 @@ footer{text-align:center;padding:120px 20px;color:var(--muted);border-top:1px so
   <h2>Nous contacter</h2>
   <div class="contact">
     <div class="panel">
-      📍 20 Rue de Metz<br>
-      57380 Longeville-lès-Saint-Avold<br><br>
+      📍 Faulquemont<br>
+      📞 <a href="tel:0387901234">03 87 90 12 34</a><br><br>
+      📍 Longeville-lès-Saint-Avold<br>
       📞 <a href="tel:0387907969">03 87 90 79 69</a><br><br>
       📦 Commandes & livraisons sur demande
     </div>
@@ -235,7 +236,7 @@ function anim(){
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
     ctx.fillStyle=`rgba(212,47,59,${p.glow})`;
-    ctx.shadowColor="rgba(255,95,160,0.8)";
+    ctx.shadowColor="rgba(212,47,59,0.9)";
     ctx.shadowBlur=20;
     ctx.fill();
   });
@@ -256,6 +257,7 @@ document.querySelectorAll("section").forEach(s=>obs.observe(s));
 </script>
 </body>
 </html>
+
 
 
 
