@@ -4,18 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maison Hypolite — Boulangerie Pâtisserie JM et FILS</title>
-<meta name="description" content="Maison Hypolite, boulangerie pâtisserie artisanale JM et FILS à Faulquemont et Longeville-lès-Saint-Avold. Commandes, livraison et savoir-faire.">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#0d0d0d; /* fond sombre */
-  --panel:#1a1a1a; /* panels sombres */
-  --text:#fdf0e3; /* texte blanc chaud */
-  --muted:#7a5c5c; /* texte secondaire */
-  --accent:#d42f3b; /* rouge lumineux */
-  --highlight:#8b1f6c; /* violet glow */
+  --bg:#0d0d0d;
+  --panel:#1a1a1a;
+  --text:#fdf0e3;
+  --muted:#7a5c5c;
+  --accent:#d42f3b;
+  --highlight:#8b1f6c;
   --radius-xl:48px;
   --radius-lg:32px;
 }
@@ -23,9 +22,9 @@
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;position:relative;}
 
-/* CANVAS PARTICULES */
+/* CANVAS */
 canvas#bg{position:fixed;inset:0;z-index:-2;}
 
 /* HERO */
@@ -36,7 +35,7 @@ header{min-height:100vh;display:flex;align-items:center;justify-content:center;t
   color:var(--accent);
   text-shadow:0 0 30px var(--accent),0 0 60px var(--highlight),0 0 90px var(--highlight);
   animation:pulse 4s infinite alternate, flicker 0.15s infinite;
-  position:relative;cursor:pointer;
+  cursor:pointer;
 }
 @keyframes pulse{
   0%{ text-shadow:0 0 20px var(--accent),0 0 40px var(--highlight);}
@@ -47,7 +46,7 @@ header{min-height:100vh;display:flex;align-items:center;justify-content:center;t
   0%,19%,21%,23%,25%,54%,56%,100%{opacity:1}
   20%,22%,24%,55%{opacity:.8}
 }
-.hero p{margin-top:30px;font-size:1.35rem;color:var(--muted);text-shadow:0 0 20px rgba(255,180,84,.3);}
+.hero p{margin-top:30px;font-size:1.35rem;color:var(--muted);}
 
 /* CTA */
 .cta{
@@ -137,7 +136,6 @@ footer{text-align:center;padding:120px 20px;color:var(--muted);border-top:1px so
 @media(max-width:900px){.hero h1{font-size:3.4rem}.contact{grid-template-columns:1fr}section{padding:120px 25px}}
 </style>
 </head>
-
 <body>
 
 <canvas id="bg"></canvas>
@@ -212,29 +210,52 @@ const canvas=document.getElementById("bg"),ctx=canvas.getContext("2d");
 function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
 resize();addEventListener("resize",resize);
 
-let layers=[
-  [...Array(80)].map(()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,v:Math.random()*0.7+0.3,glow:Math.random()*0.5+0.5})),
-  [...Array(50)].map(()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*4+2,v:Math.random()*0.4+0.2,glow:Math.random()*0.6+0.7}))
-];
+let particles=[...Array(120)].map(()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  r:Math.random()*3+1,
+  dx:(Math.random()-0.5)*0.5,
+  dy:(Math.random()-0.5)*0.5,
+  glow:Math.random()*0.7+0.3
+}));
 
-addEventListener("mousemove",e=>{layers.forEach(layer=>{layer.forEach(p=>{p.x+=(e.clientX-canvas.width/2)/2000;p.y+=(e.clientY-canvas.height/2)/2000;});});});
-addEventListener("click",e=>{layers.forEach(layer=>{layer.forEach(p=>{p.x+=(Math.random()-0.5)*50;p.y+=(Math.random()-0.5)*50;});});});
+addEventListener("mousemove",e=>{
+  particles.forEach(p=>{
+    p.x += (e.clientX-canvas.width/2)/1500;
+    p.y += (e.clientY-canvas.height/2)/1500;
+  });
+});
 
-function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);
-  layers.forEach(layer=>{layer.forEach(p=>{
-    p.y+=p.v;if(p.y>canvas.height)p.y=0;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+function anim(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x += p.dx; p.y += p.dy;
+    if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
     ctx.fillStyle=`rgba(212,47,59,${p.glow})`;
     ctx.shadowColor="rgba(255,95,160,0.8)";
-    ctx.shadowBlur=20;ctx.fill();
-  });});requestAnimationFrame(anim);}
+    ctx.shadowBlur=20;
+    ctx.fill();
+  });
+  requestAnimationFrame(anim);
+}
 anim();
 
 // SCROLL REVEAL
-const obs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");entry.target.style.boxShadow="0 0 200px rgba(212,47,59,.6)";}}},{threshold:0.2});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+      entry.target.style.boxShadow="0 0 200px rgba(212,47,59,.6)";
+    }
+  });
+},{threshold:0.2});
 document.querySelectorAll("section").forEach(s=>obs.observe(s));
 </script>
 </body>
 </html>
+
 
 
